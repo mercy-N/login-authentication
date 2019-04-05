@@ -1,0 +1,86 @@
+<!doctype <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="../../Downloads/fontawesome-free-5.8.1-web/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    
+</head>
+<body>
+   <main class="mcontent">
+       <article class="left-content">
+        <h2 class="title">Riddle</h2>
+        <p>Want to see whats on the other side?<br>the password is the answer to this riddle below</p>
+        <p id="question">I can be liquid or solid, sometimes I bubble and you can find me in every home. What am I?</p>
+    </article>
+
+    <article class="right-content">
+       <span class="right-title">Login</span>
+       <form id="login-form">
+           <input class="textinput" autofocus="autofocus" placeholder="username"><br><br>
+           <input class="textinput" id="password" type="password" autofocus="autofocus"  placeholder="Password" autocomplete="off">
+           <div id="error"></div>
+           <button id="submit"><img src="http://www.yachtsale.se/wp-content/themes/Yachtsales/images/arrow-right.png" height="24px"/></button>
+       </form>
+    </article>
+   </main>
+
+
+        <script src="../form/assets/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script> 
+var answer = "Soap";
+var timesTried = 0; 
+var maxTrials = 3;
+var interval;
+var err = document.getElementById("error");
+var pass = document.getElementById("password").value;
+document.getElementById("password").addEventListener("keyup", function(e){
+    console.log(this.value);
+if(this.value.charAt(0) =='s' || this.value.charAt(0)=='S') {
+    err.innerText = "You're on the right track..";
+    err.style.display="";
+    err.style.color = "green";
+    err.style.fontSize ="10px";
+} else {
+    err.innerText = "Are you sure..?";
+    err.style.display ="";
+    err.style.color = "red";
+    err.style.fontSize="10px";
+} 
+});
+
+
+document.getElementById('login-form').addEventListener("submit", function(e){
+    e.preventDefault();
+    if(pass != answer){
+        err.InnerText = "Go on.. give it another go!";
+        err.style.display= "";
+        err.style.color="green";
+        err.style.fontsize="10px";
+        timesTried++;
+        console.log(timesTried);
+        if(timesTried == 3){
+            document.getElementById('password').setAttribute('disabled', 'disabled');
+            err.innerText = "password has been disabled for 3 seconds";
+            setTimeout(function(){
+                document.getElementById('password').removeAttribute('disabled');
+                timesTried = 0;
+            }, 15000);
+        }
+    } else {
+        
+        alert("congratulations.");
+    } 
+});
+
+</script>   
+</body>
+</html>
